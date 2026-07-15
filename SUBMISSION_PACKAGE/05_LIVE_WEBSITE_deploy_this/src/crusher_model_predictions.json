@@ -1,0 +1,2168 @@
+{
+ "Eccentric / Main Shaft Bearing": [
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 0.5075,
+   "riskScore": 50.75,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "IR",
+   "predictedFault": "IR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 0.9775,
+   "riskScore": 97.75,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "IR",
+   "predictedFault": "IR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 1.0,
+   "riskScore": 100.0,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 0.605,
+   "riskScore": 60.5,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 1.0,
+   "riskScore": 100.0,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "Normal",
+   "predictedFault": "Normal",
+   "pFault": 0.0,
+   "wSeverity": 1.0,
+   "wDetection": 1.0,
+   "riskScore": 0.0,
+   "riskTier": "Low"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 1.0,
+   "riskScore": 100.0,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "Normal",
+   "predictedFault": "Normal",
+   "pFault": 0.005,
+   "wSeverity": 1.0,
+   "wDetection": 0.995,
+   "riskScore": 0.5,
+   "riskTier": "Low"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 0.9525,
+   "riskScore": 95.25,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 1.0,
+   "riskScore": 100.0,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 0.9925,
+   "riskScore": 99.25,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 0.9925,
+   "riskScore": 99.25,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 1.0,
+   "riskScore": 100.0,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 0.8525,
+   "riskScore": 85.25,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 1.0,
+   "riskScore": 100.0,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 0.9575,
+   "riskScore": 95.75,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "Normal",
+   "predictedFault": "Normal",
+   "pFault": 0.0,
+   "wSeverity": 1.0,
+   "wDetection": 1.0,
+   "riskScore": 0.0,
+   "riskTier": "Low"
+  },
+  {
+   "trueFault": "IR",
+   "predictedFault": "IR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 0.995,
+   "riskScore": 99.5,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 1.0,
+   "riskScore": 100.0,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "Normal",
+   "predictedFault": "Normal",
+   "pFault": 0.0,
+   "wSeverity": 1.0,
+   "wDetection": 1.0,
+   "riskScore": 0.0,
+   "riskTier": "Low"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 1.0,
+   "riskScore": 100.0,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 0.995,
+   "riskScore": 99.5,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "IR",
+   "predictedFault": "IR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 0.995,
+   "riskScore": 99.5,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "IR",
+   "predictedFault": "IR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 0.985,
+   "riskScore": 98.5,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 1.0,
+   "riskScore": 100.0,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 0.905,
+   "riskScore": 90.5,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "IR",
+   "predictedFault": "IR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 0.9675,
+   "riskScore": 96.75,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 1.0,
+   "riskScore": 100.0,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 1.0,
+   "riskScore": 100.0,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "IR",
+   "predictedFault": "IR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 0.995,
+   "riskScore": 99.5,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 0.97,
+   "riskScore": 97.0,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 0.995,
+   "riskScore": 99.5,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "IR",
+   "predictedFault": "IR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 0.9825,
+   "riskScore": 98.25,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "IR",
+   "predictedFault": "IR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 0.9825,
+   "riskScore": 98.25,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 0.945,
+   "riskScore": 94.5,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "Normal",
+   "predictedFault": "Normal",
+   "pFault": 0.0,
+   "wSeverity": 1.0,
+   "wDetection": 1.0,
+   "riskScore": 0.0,
+   "riskTier": "Low"
+  },
+  {
+   "trueFault": "Normal",
+   "predictedFault": "Normal",
+   "pFault": 0.0,
+   "wSeverity": 1.0,
+   "wDetection": 1.0,
+   "riskScore": 0.0,
+   "riskTier": "Low"
+  },
+  {
+   "trueFault": "IR",
+   "predictedFault": "IR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 0.94,
+   "riskScore": 94.0,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 0.9475,
+   "riskScore": 94.75,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "Normal",
+   "predictedFault": "Normal",
+   "pFault": 0.0,
+   "wSeverity": 1.0,
+   "wDetection": 1.0,
+   "riskScore": 0.0,
+   "riskTier": "Low"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 0.995,
+   "riskScore": 99.5,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 0.98,
+   "riskScore": 98.0,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 0.865,
+   "riskScore": 86.5,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 1.0,
+   "riskScore": 100.0,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "IR",
+   "predictedFault": "IR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 0.7175,
+   "riskScore": 71.75,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 1.0,
+   "riskScore": 100.0,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 0.9725,
+   "riskScore": 97.25,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 0.995,
+   "riskScore": 99.5,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 0.9925,
+   "riskScore": 99.25,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 0.99,
+   "riskScore": 99.0,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 0.995,
+   "riskScore": 99.5,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "Normal",
+   "predictedFault": "Normal",
+   "pFault": 0.0,
+   "wSeverity": 1.0,
+   "wDetection": 1.0,
+   "riskScore": 0.0,
+   "riskTier": "Low"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 0.9825,
+   "riskScore": 98.25,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "IR",
+   "predictedFault": "IR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 1.0,
+   "riskScore": 100.0,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "IR",
+   "predictedFault": "IR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 0.9775,
+   "riskScore": 97.75,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 0.935,
+   "riskScore": 93.5,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 1.0,
+   "riskScore": 100.0,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 0.995,
+   "riskScore": 99.5,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "IR",
+   "predictedFault": "IR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 0.9625,
+   "riskScore": 96.25,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 0.9875,
+   "riskScore": 98.75,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 0.9725,
+   "riskScore": 97.25,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 0.99,
+   "riskScore": 99.0,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 0.7875,
+   "riskScore": 78.75,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 1.0,
+   "riskScore": 100.0,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 1.0,
+   "riskScore": 100.0,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 0.775,
+   "riskScore": 77.5,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 1.0,
+   "riskScore": 100.0,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 0.9575,
+   "riskScore": 95.75,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 1.0,
+   "riskScore": 100.0,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 1.0,
+   "riskScore": 100.0,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "IR",
+   "predictedFault": "IR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 1.0,
+   "riskScore": 100.0,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 0.9375,
+   "riskScore": 93.75,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "IR",
+   "predictedFault": "IR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 0.995,
+   "riskScore": 99.5,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "IR",
+   "predictedFault": "IR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 1.0,
+   "riskScore": 100.0,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 0.8625,
+   "riskScore": 86.25,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 0.915,
+   "riskScore": 91.5,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 0.995,
+   "wSeverity": 1.0,
+   "wDetection": 0.9225,
+   "riskScore": 91.79,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 0.9275,
+   "riskScore": 92.75,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 1.0,
+   "riskScore": 100.0,
+   "riskTier": "Critical"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 1.0,
+   "wDetection": 0.9525,
+   "riskScore": 95.25,
+   "riskTier": "Critical"
+  }
+ ],
+ "Drive Motor Bearing": [
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 0.9775,
+   "riskScore": 63.54,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "Normal",
+   "predictedFault": "Normal",
+   "pFault": 0.0,
+   "wSeverity": 0.65,
+   "wDetection": 1.0,
+   "riskScore": 0.0,
+   "riskTier": "Low"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 1.0,
+   "riskScore": 65.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 0.9575,
+   "riskScore": 62.24,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 0.915,
+   "riskScore": 59.48,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 0.6275,
+   "riskScore": 40.79,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 1.0,
+   "riskScore": 65.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 1.0,
+   "riskScore": 65.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 0.8675,
+   "riskScore": 56.39,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 0.9175,
+   "riskScore": 59.64,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 0.995,
+   "wSeverity": 0.65,
+   "wDetection": 0.945,
+   "riskScore": 61.12,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "Normal",
+   "predictedFault": "Normal",
+   "pFault": 0.095,
+   "wSeverity": 0.65,
+   "wDetection": 0.91,
+   "riskScore": 5.62,
+   "riskTier": "Low"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 1.0,
+   "riskScore": 65.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 1.0,
+   "riskScore": 65.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 1.0,
+   "riskScore": 65.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 0.9675,
+   "riskScore": 62.89,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 1.0,
+   "riskScore": 65.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "IR",
+   "predictedFault": "IR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 1.0,
+   "riskScore": 65.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 0.975,
+   "riskScore": 63.38,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 1.0,
+   "riskScore": 65.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 0.8475,
+   "riskScore": 55.09,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "IR",
+   "predictedFault": "IR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 0.995,
+   "riskScore": 64.68,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 0.9875,
+   "riskScore": 64.19,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 0.995,
+   "riskScore": 64.68,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 0.6375,
+   "riskScore": 41.44,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 0.9875,
+   "riskScore": 64.19,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "IR",
+   "predictedFault": "IR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 1.0,
+   "riskScore": 65.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 0.8775,
+   "riskScore": 57.04,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "IR",
+   "predictedFault": "IR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 1.0,
+   "riskScore": 65.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 0.9875,
+   "riskScore": 64.19,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 1.0,
+   "riskScore": 65.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 1.0,
+   "riskScore": 65.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 0.9075,
+   "riskScore": 58.99,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 0.8425,
+   "riskScore": 54.76,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 1.0,
+   "riskScore": 65.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "IR",
+   "predictedFault": "IR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 1.0,
+   "riskScore": 65.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 1.0,
+   "riskScore": 65.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 0.945,
+   "riskScore": 61.42,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 1.0,
+   "riskScore": 65.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 0.8475,
+   "riskScore": 55.09,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 0.76,
+   "riskScore": 49.4,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 1.0,
+   "riskScore": 65.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 1.0,
+   "riskScore": 65.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 0.945,
+   "riskScore": 61.42,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 1.0,
+   "riskScore": 65.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "Normal",
+   "predictedFault": "Normal",
+   "pFault": 0.0,
+   "wSeverity": 0.65,
+   "wDetection": 1.0,
+   "riskScore": 0.0,
+   "riskTier": "Low"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 0.9925,
+   "riskScore": 64.51,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 0.995,
+   "riskScore": 64.68,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 0.995,
+   "riskScore": 64.68,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 0.995,
+   "riskScore": 64.68,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "IR",
+   "predictedFault": "IR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 0.955,
+   "riskScore": 62.08,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 1.0,
+   "riskScore": 65.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "IR",
+   "predictedFault": "IR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 1.0,
+   "riskScore": 65.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 0.985,
+   "riskScore": 64.03,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 0.9,
+   "riskScore": 58.5,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 1.0,
+   "riskScore": 65.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 1.0,
+   "riskScore": 65.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 0.6375,
+   "riskScore": 41.44,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 1.0,
+   "riskScore": 65.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 0.925,
+   "riskScore": 60.13,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 1.0,
+   "riskScore": 65.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 0.995,
+   "riskScore": 64.68,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 0.965,
+   "riskScore": 62.73,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 0.985,
+   "riskScore": 64.03,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 0.7775,
+   "riskScore": 50.54,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "IR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 0.5725,
+   "riskScore": 37.21,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "IR",
+   "predictedFault": "IR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 0.96,
+   "riskScore": 62.4,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "Normal",
+   "predictedFault": "Normal",
+   "pFault": 0.0,
+   "wSeverity": 0.65,
+   "wDetection": 1.0,
+   "riskScore": 0.0,
+   "riskTier": "Low"
+  },
+  {
+   "trueFault": "Normal",
+   "predictedFault": "Normal",
+   "pFault": 0.015,
+   "wSeverity": 0.65,
+   "wDetection": 0.985,
+   "riskScore": 0.96,
+   "riskTier": "Low"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 1.0,
+   "riskScore": 65.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 0.685,
+   "riskScore": 44.53,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 1.0,
+   "riskScore": 65.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "Normal",
+   "predictedFault": "Normal",
+   "pFault": 0.0,
+   "wSeverity": 0.65,
+   "wDetection": 1.0,
+   "riskScore": 0.0,
+   "riskTier": "Low"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 0.995,
+   "riskScore": 64.68,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 1.0,
+   "riskScore": 65.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 1.0,
+   "riskScore": 65.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 1.0,
+   "riskScore": 65.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 0.9,
+   "riskScore": 58.5,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 0.995,
+   "riskScore": 64.68,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 0.65,
+   "wDetection": 0.8325,
+   "riskScore": 54.11,
+   "riskTier": "Medium"
+  }
+ ],
+ "Countershaft Bearing": [
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.915,
+   "riskScore": 50.33,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 1.0,
+   "riskScore": 55.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.7675,
+   "riskScore": 42.21,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.775,
+   "riskScore": 42.63,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "IR",
+   "predictedFault": "IR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 1.0,
+   "riskScore": 55.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.8925,
+   "riskScore": 49.09,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 1.0,
+   "riskScore": 55.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.96,
+   "riskScore": 52.8,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.805,
+   "riskScore": 44.28,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 1.0,
+   "riskScore": 55.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 1.0,
+   "riskScore": 55.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.995,
+   "riskScore": 54.73,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.53,
+   "riskScore": 29.15,
+   "riskTier": "Low"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 1.0,
+   "riskScore": 55.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "IR",
+   "predictedFault": "IR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.96,
+   "riskScore": 52.8,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "IR",
+   "predictedFault": "IR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.98,
+   "riskScore": 53.9,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.965,
+   "riskScore": 53.08,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.99,
+   "riskScore": 54.45,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "IR",
+   "predictedFault": "IR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.65,
+   "riskScore": 35.75,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.9725,
+   "riskScore": 53.49,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.965,
+   "riskScore": 53.08,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.92,
+   "riskScore": 50.6,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 1.0,
+   "riskScore": 55.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 0.99,
+   "wSeverity": 0.55,
+   "wDetection": 0.8525,
+   "riskScore": 46.42,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.8275,
+   "riskScore": 45.51,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "IR",
+   "predictedFault": "IR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 1.0,
+   "riskScore": 55.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "IR",
+   "predictedFault": "IR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.9875,
+   "riskScore": 54.31,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 1.0,
+   "riskScore": 55.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.985,
+   "riskScore": 54.17,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.9725,
+   "riskScore": 53.49,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "IR",
+   "predictedFault": "IR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.8575,
+   "riskScore": 47.16,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 1.0,
+   "riskScore": 55.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 1.0,
+   "riskScore": 55.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "IR",
+   "predictedFault": "IR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.9875,
+   "riskScore": 54.31,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.9575,
+   "riskScore": 52.66,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "Normal",
+   "predictedFault": "Normal",
+   "pFault": 0.0,
+   "wSeverity": 0.55,
+   "wDetection": 1.0,
+   "riskScore": 0.0,
+   "riskTier": "Low"
+  },
+  {
+   "trueFault": "IR",
+   "predictedFault": "IR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.9875,
+   "riskScore": 54.31,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.935,
+   "riskScore": 51.43,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 1.0,
+   "riskScore": 55.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 1.0,
+   "riskScore": 55.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.975,
+   "riskScore": 53.62,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.98,
+   "riskScore": 53.9,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.5875,
+   "riskScore": 32.31,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.9075,
+   "riskScore": 49.91,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.92,
+   "riskScore": 50.6,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.9925,
+   "riskScore": 54.59,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 1.0,
+   "riskScore": 55.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "IR",
+   "predictedFault": "IR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 1.0,
+   "riskScore": 55.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.9675,
+   "riskScore": 53.21,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 1.0,
+   "riskScore": 55.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.985,
+   "riskScore": 54.17,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.915,
+   "riskScore": 50.33,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "IR",
+   "predictedFault": "IR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.6975,
+   "riskScore": 38.36,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.995,
+   "riskScore": 54.73,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "IR",
+   "predictedFault": "IR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.9275,
+   "riskScore": 51.01,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "IR",
+   "predictedFault": "IR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 1.0,
+   "riskScore": 55.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.62,
+   "riskScore": 34.1,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.98,
+   "riskScore": 53.9,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "Normal",
+   "predictedFault": "Normal",
+   "pFault": 0.0,
+   "wSeverity": 0.55,
+   "wDetection": 1.0,
+   "riskScore": 0.0,
+   "riskTier": "Low"
+  },
+  {
+   "trueFault": "IR",
+   "predictedFault": "IR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 1.0,
+   "riskScore": 55.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.9725,
+   "riskScore": 53.49,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.9525,
+   "riskScore": 52.39,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 1.0,
+   "riskScore": 55.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "Normal",
+   "predictedFault": "Normal",
+   "pFault": 0.0,
+   "wSeverity": 0.55,
+   "wDetection": 1.0,
+   "riskScore": 0.0,
+   "riskTier": "Low"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.94,
+   "riskScore": 51.7,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.7,
+   "riskScore": 38.5,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.88,
+   "riskScore": 48.4,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "IR",
+   "predictedFault": "IR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.83,
+   "riskScore": 45.65,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "IR",
+   "predictedFault": "IR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 1.0,
+   "riskScore": 55.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 1.0,
+   "riskScore": 55.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.905,
+   "riskScore": 49.78,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "IR",
+   "predictedFault": "IR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.9725,
+   "riskScore": 53.49,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 1.0,
+   "riskScore": 55.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.625,
+   "riskScore": 34.38,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 1.0,
+   "riskScore": 55.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.995,
+   "riskScore": 54.73,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 1.0,
+   "riskScore": 55.0,
+   "riskTier": "High"
+  },
+  {
+   "trueFault": "OR",
+   "predictedFault": "OR",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.9625,
+   "riskScore": 52.94,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 0.995,
+   "wSeverity": 0.55,
+   "wDetection": 0.9825,
+   "riskScore": 53.77,
+   "riskTier": "Medium"
+  },
+  {
+   "trueFault": "B",
+   "predictedFault": "B",
+   "pFault": 1.0,
+   "wSeverity": 0.55,
+   "wDetection": 0.98,
+   "riskScore": 53.9,
+   "riskTier": "Medium"
+  }
+ ]
+}
