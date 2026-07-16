@@ -20,6 +20,21 @@ modes by design — no public dataset exists for these failure modes (see the
 reliability framework document, Section 0). They're visually distinct
 (thickness bar, not a risk gauge) so nothing implies they're ML-scored.
 
+## Fixed: serverless function size limit
+
+An earlier version of `/api/predict.py` used scikit-learn to load a
+pickled model. scikit-learn pulls in scipy, which pushed the deployed
+function bundle over Vercel's 225MB serverless function size limit
+(`Total bundle size (228.93 MB) exceeds the maximum function size (225 MB)`).
+
+**Fix:** the trained model's decision trees were exported to plain JSON
+(`api/crusher_model_export.json`), and `api/rf_inference.py` walks those
+trees using only the Python standard library — no scikit-learn, scipy, or
+numpy at runtime. This was verified to match scikit-learn's
+`predict_proba()` output exactly (max difference 3.33e-16, i.e.
+floating-point noise) across all 60 held-out test samples before the
+switch. `requirements.txt` is now empty — zero external dependencies.
+
 ## Project structure
 
 ```
@@ -27,8 +42,9 @@ src/CrusherDashboard.jsx        Main dashboard component
 src/crusher_model_predictions.json  80 precomputed real predictions per component
 src/crusher_test_samples.json   60 real held-out feature vectors, used by Live mode
 api/predict.py                  Vercel Python serverless function (live inference)
-api/crusher_bearing_model.pkl   Trained RandomForestClassifier (~1MB, 50 trees)
-requirements.txt                Python deps for the serverless function
+api/rf_inference.py             Pure-Python tree-walking inference (no dependencies)
+api/crusher_model_export.json   Trained model's raw tree structure (~2.2MB)
+requirements.txt                Empty — no external Python packages needed
 ```
 
 ## Local development
