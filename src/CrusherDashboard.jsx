@@ -50,6 +50,59 @@ const ACTION_TEXT = {
   Low: "No action — continue routine monitoring",
 };
 
+// Escalation workflow — who gets notified, response SLA, per tier.
+// Mirrors the Maintenance Escalation Workflow document (Task 1.1).
+const ESCALATION_INFO = {
+  Critical: {
+    notified: "Area Maintenance Supervisor + Plant Reliability Manager + Shift Operations Manager",
+    channel: "SMS / direct call",
+    sla: "Acknowledge within 2 hrs",
+    logging: "Formal incident log opened; RCA Level 3 mandatory; requires Reliability Manager sign-off to close",
+  },
+  High: {
+    notified: "Maintenance Planner + Area Maintenance Supervisor",
+    channel: "Push notification + dashboard alert",
+    sla: "Acknowledge within 48 hrs; inspect within 1–2 weeks",
+    logging: "Work order raised in CMMS; triggers RCA Level 2 if inspection confirms abnormal condition",
+  },
+  Medium: {
+    notified: "Shift Reliability Engineer + Maintenance Planner",
+    channel: "Daily digest email",
+    sla: "Within 24 hrs (next planning cycle)",
+    logging: "Logged in CMMS as a watch item",
+  },
+  Low: {
+    notified: "None — dashboard visibility only",
+    channel: "Dashboard only",
+    sla: "N/A (routine)",
+    logging: "Auto-logged by system, no manual entry",
+  },
+};
+
+// Root-cause hints per component — drawn from the Fishbone (Ishikawa)
+// categories in the RCA Framework document (Task 1.2). These are starting
+// hypotheses for an investigator, not a diagnosis.
+const ROOT_CAUSE_HINTS = {
+  eccentric: "Most common root cause industry-wide: lubrication starvation — 56% of premature bearing failures are lubrication-related. Check grease line pressure and schedule first.",
+  motor: "Common contributors: misalignment, electrical imbalance, or bearing seating wear. Cross-check motor current signature if available.",
+  counter: "Often linked to belt or coupling misalignment upstream rather than the bearing itself.",
+  jaw: "Wear-related, not a sudden fault — tied to tonnage processed and feed material hardness. Compare against expected wear-rate curve.",
+  toggle: "Structural fatigue — cracks typically appear suddenly between shifts, not gradually. Prioritize visual inspection over trend analysis.",
+  css: "Setting drift usually reflects accumulated liner wear or eccentric bushing wear, not a single-point failure.",
+};
+
+// Top system risks — condensed from the Industrial Risk Register (Task 1.3).
+const RISK_REGISTER_TOP = [
+  { id: "R2", desc: "Model trained on proxy data (CWRU Bearing Dataset) may not generalize to real DCP sensors", impact: "High", mitigation: "Phase 1 pilot validates against real signals before full trust is placed in output; human sign-off required on Critical alerts during pilot" },
+  { id: "R3", desc: "Unmodeled components (jaw plate, toggle plate, CSS drift) produce no ML warning", impact: "High", mitigation: "Reported separately via thickness tracking against a condemn limit — never silently omitted or given a fabricated score" },
+  { id: "R5", desc: "Alert fatigue — high alert volume causes operators to start ignoring notifications", impact: "Medium", mitigation: "Only High/Critical tiers interrupt operators directly (SMS/push); false-positive rate tracked as an ongoing KPI" },
+  { id: "R6", desc: "Coal mill fire/explosion signal wrongly treated as a routine maintenance alert", impact: "Catastrophic (low likelihood)", mitigation: "Kept as a fully separate, independent hardwired safety trip — never blended into this 0–100 mechanical score" },
+];
+
+// Business impact reference figures — industry-wide estimates (not DCP-
+// confirmed), used only to illustrate the order of magnitude at stake.
+const CRUSHER_DOWNTIME_COST_PER_DAY = { low: 120000, high: 350000 };
+
 function nowLabel() {
   const d = new Date();
   return d.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
@@ -207,14 +260,17 @@ function CrusherSchematic({ eccentricScore, eccentricTier, jawWear, cssPct }) {
   );
 }
 
-function ModeledCard({ eq }) {
+function ModeledCard({ eq, onClick }) {
   const tier = eq.riskTier;
   return (
-    <div style={{
+    <div onClick={onClick} style={{
       background: COLORS.bgPanel, border: `1px solid ${COLORS.border}`, borderRadius: 10,
-      padding: "14px 16px", display: "flex", flexDirection: "column", gap: 8,
-      borderLeft: `3px solid ${TIER_COLOR[tier]}`,
-    }}>
+      padding: "14px 16px", display: "flex", flexDirection: "column", gap: 8, cursor: "pointer",
+      borderLeft: `3px solid ${TIER_COLOR[tier]}`, transition: "transform 0.15s ease",
+    }}
+    onMouseEnter={e => e.currentTarget.style.transform = "translateY(-2px)"}
+    onMouseLeave={e => e.currentTarget.style.transform = "translateY(0)"}
+    >
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
         <div>
           <div style={{ fontFamily: "'Oswald', sans-serif", fontSize: 13.5, color: COLORS.textPrimary }}>{eq.name}</div>
@@ -230,17 +286,21 @@ function ModeledCard({ eq }) {
         <RiskGauge score={eq.riskScore} tier={tier} />
       </div>
       <div style={{ fontSize: 11, color: COLORS.textMuted, lineHeight: 1.4 }}>{ACTION_TEXT[tier]}</div>
+      <div style={{ fontSize: 9.5, color: COLORS.steel, fontFamily: "'IBM Plex Mono', monospace" }}>Click for escalation details &amp; root cause →</div>
     </div>
   );
 }
 
-function WearCard({ eq, pct }) {
+function WearCard({ eq, pct, onClick }) {
   return (
-    <div style={{
+    <div onClick={onClick} style={{
       background: COLORS.bgPanel, border: `1px solid ${COLORS.border}`, borderRadius: 10,
-      padding: "14px 16px", display: "flex", flexDirection: "column", gap: 10,
-      borderLeft: `3px solid ${COLORS.wear}`,
-    }}>
+      padding: "14px 16px", display: "flex", flexDirection: "column", gap: 10, cursor: "pointer",
+      borderLeft: `3px solid ${COLORS.wear}`, transition: "transform 0.15s ease",
+    }}
+    onMouseEnter={e => e.currentTarget.style.transform = "translateY(-2px)"}
+    onMouseLeave={e => e.currentTarget.style.transform = "translateY(0)"}
+    >
       <div>
         <div style={{ fontFamily: "'Oswald', sans-serif", fontSize: 13.5, color: COLORS.textPrimary }}>{eq.name}</div>
         <div style={{
@@ -250,13 +310,143 @@ function WearCard({ eq, pct }) {
         }}>No ML model — thickness tracked</div>
       </div>
       <WearBar pct={pct} weeksToCondemn={eq.weeksToCondemn} />
+      <div style={{ fontSize: 9.5, color: COLORS.wear, fontFamily: "'IBM Plex Mono', monospace" }}>Click for escalation details &amp; root cause →</div>
     </div>
   );
 }
 
 // ---------------------------------------------------------------------------
-// Main dashboard
+// Component detail modal — click-through drill-down (escalation + root cause)
 // ---------------------------------------------------------------------------
+function DetailModal({ item, onClose }) {
+  if (!item) return null;
+  const isWear = item.kind === "wear";
+  const tier = isWear ? (item.pct >= 80 ? "Critical" : item.pct >= 55 ? "High" : "Medium") : item.riskTier;
+  const esc = ESCALATION_INFO[tier];
+  const hint = ROOT_CAUSE_HINTS[item.id];
+
+  return (
+    <div onClick={onClose} style={{
+      position: "fixed", inset: 0, background: "rgba(0,0,0,0.6)", zIndex: 100,
+      display: "flex", alignItems: "center", justifyContent: "center", padding: 20,
+    }}>
+      <div onClick={e => e.stopPropagation()} style={{
+        background: COLORS.bgPanel, border: `1px solid ${COLORS.border}`, borderRadius: 12,
+        maxWidth: 520, width: "100%", padding: 26, maxHeight: "85vh", overflowY: "auto",
+        borderTop: `3px solid ${TIER_COLOR[tier] || COLORS.wear}`,
+      }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 4 }}>
+          <div style={{ fontFamily: "'Oswald', sans-serif", fontSize: 18, color: COLORS.textPrimary }}>{item.name}</div>
+          <button onClick={onClose} style={{ background: "none", border: "none", color: COLORS.textMuted, cursor: "pointer", fontSize: 18, lineHeight: 1 }}>✕</button>
+        </div>
+        <div style={{
+          display: "inline-block", fontFamily: "'IBM Plex Mono', monospace", fontSize: 10,
+          padding: "3px 9px", borderRadius: 4, background: (TIER_COLOR[tier] || COLORS.wear) + "22", color: TIER_COLOR[tier] || COLORS.wear,
+          letterSpacing: 1, textTransform: "uppercase", fontWeight: 600, marginBottom: 16,
+        }}>{tier} tier{isWear ? " (wear-based)" : " (ML-modeled)"}</div>
+
+        <div style={{ fontSize: 11, letterSpacing: 1, color: COLORS.textMuted, textTransform: "uppercase", marginBottom: 6, fontFamily: "'IBM Plex Mono', monospace" }}>Escalation Workflow</div>
+        <div style={{ background: COLORS.bgPanelRaised, borderRadius: 8, padding: 14, marginBottom: 16, fontSize: 12.5, lineHeight: 1.7, color: COLORS.textPrimary }}>
+          <div><b>Notified:</b> {esc.notified}</div>
+          <div><b>Channel:</b> {esc.channel}</div>
+          <div><b>Response SLA:</b> {esc.sla}</div>
+          <div><b>Logging:</b> {esc.logging}</div>
+        </div>
+
+        <div style={{ fontSize: 11, letterSpacing: 1, color: COLORS.textMuted, textTransform: "uppercase", marginBottom: 6, fontFamily: "'IBM Plex Mono', monospace" }}>Root Cause Hint</div>
+        <div style={{ fontSize: 12.5, lineHeight: 1.6, color: COLORS.textPrimary, marginBottom: 4 }}>{hint}</div>
+        <div style={{ fontSize: 10.5, color: COLORS.textMuted, fontStyle: "italic" }}>Starting hypothesis only — confirm via 5 Whys / Fishbone RCA per the framework, not a diagnosis.</div>
+      </div>
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Business impact strip
+// ---------------------------------------------------------------------------
+function BusinessImpactStrip({ criticalCount, highCount }) {
+  const flagged = criticalCount + highCount;
+  return (
+    <div style={{
+      display: "flex", alignItems: "center", gap: 16, padding: "12px 32px",
+      background: COLORS.bgPanelRaised, borderBottom: `1px solid ${COLORS.border}`, flexWrap: "wrap",
+    }}>
+      <div style={{ fontFamily: "'Oswald', sans-serif", fontSize: 12, letterSpacing: 1, color: COLORS.textMuted, textTransform: "uppercase" }}>
+        Business Impact
+      </div>
+      <div style={{ fontSize: 12.5, color: COLORS.textPrimary }}>
+        {flagged === 0
+          ? "No components currently flagged High/Critical."
+          : <>Currently <b style={{ color: criticalCount > 0 ? COLORS.critical : COLORS.high }}>{flagged}</b> component{flagged > 1 ? "s" : ""} at High/Critical risk.</>
+        } Industry data puts unplanned primary crusher downtime at{" "}
+        <b style={{ color: COLORS.textPrimary }}>${CRUSHER_DOWNTIME_COST_PER_DAY.low.toLocaleString()}–${CRUSHER_DOWNTIME_COST_PER_DAY.high.toLocaleString()} per day</b> in lost production.
+      </div>
+      <div style={{ fontSize: 10, color: COLORS.textMuted, fontStyle: "italic", marginLeft: "auto" }}>
+        Industry-wide estimate, not DCP-confirmed — for illustration of order of magnitude only.
+      </div>
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Collapsible methodology panel
+// ---------------------------------------------------------------------------
+function MethodologyPanel({ open, onToggle }) {
+  return (
+    <div style={{ background: COLORS.bgPanel, border: `1px solid ${COLORS.border}`, borderRadius: 10, overflow: "hidden" }}>
+      <button onClick={onToggle} style={{
+        width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center",
+        background: "none", border: "none", cursor: "pointer", padding: "16px 20px",
+        fontFamily: "'Oswald', sans-serif", fontSize: 13, letterSpacing: 1.5, color: COLORS.textMuted, textTransform: "uppercase",
+      }}>
+        <span style={{ display: "flex", alignItems: "center", gap: 8 }}><Cpu size={13} color={COLORS.steel} /> Methodology &amp; Data Sources</span>
+        <span style={{ color: COLORS.steel }}>{open ? "−" : "+"}</span>
+      </button>
+      {open && (
+        <div style={{ padding: "0 20px 20px", fontSize: 12, lineHeight: 1.7, color: COLORS.textPrimary }}>
+          <p style={{ margin: "0 0 10px" }}><b>Training data:</b> CWRU Bearing Dataset — real vibration recordings from seeded ball/inner-race/outer-race bearing faults, Case Western Reserve University Bearing Data Center. Widely-cited industry benchmark, not synthetic or fabricated data.</p>
+          <p style={{ margin: "0 0 10px" }}><b>Model:</b> Random Forest classifier, 50 trees, 96.6% accuracy on held-out test data (shrunk from a 200-tree/97.3% version to fit serverless deployment size limits — see Live API mode).</p>
+          <p style={{ margin: "0 0 10px" }}><b>Modeled vs. unmodeled split:</b> bearing components (Eccentric Shaft, Drive Motor, Countershaft) are backed by this trained classifier. Wear components (Jaw Plate, Toggle Plate, CSS Drift) have no matching public sensor dataset — no vibration dataset captures geometric wear the way it captures bearing degradation — so they are tracked by thickness/inspection interval instead, and clearly marked as such throughout this dashboard rather than assigned a fabricated score.</p>
+          <p style={{ margin: 0 }}><b>Key assumption:</b> this model is trained on proxy data, not real DCP sensor signals. It demonstrates the approach is technically sound; a Phase 1 pilot against real plant sensors is required before Critical-tier alerts should be trusted without human sign-off.</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Collapsible risk & limitations panel
+// ---------------------------------------------------------------------------
+function RiskLimitationsPanel({ open, onToggle }) {
+  return (
+    <div style={{ background: COLORS.bgPanel, border: `1px solid ${COLORS.border}`, borderRadius: 10, overflow: "hidden" }}>
+      <button onClick={onToggle} style={{
+        width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center",
+        background: "none", border: "none", cursor: "pointer", padding: "16px 20px",
+        fontFamily: "'Oswald', sans-serif", fontSize: 13, letterSpacing: 1.5, color: COLORS.textMuted, textTransform: "uppercase",
+      }}>
+        <span style={{ display: "flex", alignItems: "center", gap: 8 }}><AlertTriangle size={13} color={COLORS.wear} /> System Risks &amp; Limitations</span>
+        <span style={{ color: COLORS.steel }}>{open ? "−" : "+"}</span>
+      </button>
+      {open && (
+        <div style={{ padding: "0 20px 20px", display: "flex", flexDirection: "column", gap: 12 }}>
+          {RISK_REGISTER_TOP.map(r => (
+            <div key={r.id} style={{ background: COLORS.bgPanelRaised, borderRadius: 8, padding: "12px 14px", borderLeft: `3px solid ${COLORS.wear}` }}>
+              <div style={{ display: "flex", gap: 8, alignItems: "baseline", marginBottom: 4 }}>
+                <span style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: 10.5, color: COLORS.wear, fontWeight: 600 }}>{r.id}</span>
+                <span style={{ fontSize: 12, color: COLORS.textPrimary }}>{r.desc}</span>
+              </div>
+              <div style={{ fontSize: 11, color: COLORS.textMuted, lineHeight: 1.5 }}><b>Mitigation:</b> {r.mitigation}</div>
+            </div>
+          ))}
+          <div style={{ fontSize: 10.5, color: COLORS.textMuted, fontStyle: "italic" }}>Full 8-risk register with likelihood/impact scoring maintained separately in the Industrial Risk Register document (Task 1.3).</div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+
 export default function CrusherDashboard() {
   const cursorRef = useRef({});
 
@@ -274,6 +464,9 @@ export default function CrusherDashboard() {
   const [liveMode, setLiveMode] = useState(false);
   const [liveLoading, setLiveLoading] = useState(false);
   const [liveError, setLiveError] = useState(null);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [showMethodology, setShowMethodology] = useState(false);
+  const [showRisks, setShowRisks] = useState(false);
   const historyRef = useRef([]);
 
   useEffect(() => {
@@ -388,6 +581,11 @@ export default function CrusherDashboard() {
         </div>
       )}
 
+      <BusinessImpactStrip
+        criticalCount={modeled.filter(e => e.riskTier === "Critical").length}
+        highCount={modeled.filter(e => e.riskTier === "High").length}
+      />
+
       <div style={{ background: COLORS.bgPanel, borderBottom: `1px solid ${COLORS.border}` }}>
         <CrusherSchematic eccentricScore={eccentric.riskScore} eccentricTier={eccentric.riskTier} jawWear={jawWear.pct} cssPct={cssWear.pct} />
       </div>
@@ -402,7 +600,7 @@ export default function CrusherDashboard() {
               </div>
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(230px, 1fr))", gap: 14 }}>
-              {modeled.map(eq => <ModeledCard key={eq.id} eq={eq} />)}
+              {modeled.map(eq => <ModeledCard key={eq.id} eq={eq} onClick={() => setSelectedItem({ ...eq, kind: "model" })} />)}
             </div>
           </div>
 
@@ -411,7 +609,7 @@ export default function CrusherDashboard() {
               Wear Components — Thickness Tracked, No ML Model
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 14 }}>
-              {wear.map(eq => <WearCard key={eq.id} eq={eq} pct={eq.pct} />)}
+              {wear.map(eq => <WearCard key={eq.id} eq={eq} pct={eq.pct} onClick={() => setSelectedItem({ ...eq, kind: "wear" })} />)}
             </div>
           </div>
 
@@ -475,8 +673,13 @@ export default function CrusherDashboard() {
               </div>
             )}
           </div>
+
+          <MethodologyPanel open={showMethodology} onToggle={() => setShowMethodology(v => !v)} />
+          <RiskLimitationsPanel open={showRisks} onToggle={() => setShowRisks(v => !v)} />
         </div>
       </div>
+
+      <DetailModal item={selectedItem} onClose={() => setSelectedItem(null)} />
 
       <div style={{ padding: "0 32px 24px", fontFamily: "'IBM Plex Mono', monospace", fontSize: 10.5, color: COLORS.textMuted, textAlign: "center" }}>
         {liveMode
