@@ -3,7 +3,7 @@ import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   ScatterChart, Scatter, ZAxis
 } from "recharts";
-import { AlertTriangle, CheckCircle2, Activity, Gauge, Clock, ChevronRight, Ruler, Cpu } from "lucide-react";
+import { AlertTriangle, CheckCircle2, Activity, Gauge, Clock, ChevronRight, Ruler, Cpu, Leaf, Map, Flame } from "lucide-react";
 import modelPredictions from "./crusher_model_predictions.json";
 import testSamples from "./crusher_test_samples.json";
 
@@ -49,8 +49,6 @@ const ACTION_TEXT = {
   Medium: "Add to next planned maintenance window; monitor trend",
   Low: "No action — continue routine monitoring",
 };
-
-const WEAR_ACTION = "Plan replacement before condemn limit — schedule during next stop";
 
 // Escalation workflow — who gets notified, response SLA, per tier.
 // Mirrors the Maintenance Escalation Workflow document (Task 1.1).
@@ -104,6 +102,24 @@ const RISK_REGISTER_TOP = [
 // Business impact reference figures — industry-wide estimates (not DCP-
 // confirmed), used only to illustrate the order of magnitude at stake.
 const CRUSHER_DOWNTIME_COST_PER_DAY = { low: 120000, high: 350000 };
+
+// Implementation roadmap — high-level phases (full detail owned separately
+// by the Business Case & Strategy Lead).
+const ROADMAP_PHASES = [
+  { phase: "Phase 1", title: "Audit", months: "Months 1–2", desc: "Validate this architecture against 1–2 real DCP sensors; confirm crusher/mill types and severity assumptions on-site." },
+  { phase: "Phase 2", title: "Pilot", months: "Months 3–5", desc: "Deploy on one crusher or kiln for a defined trial; mandatory human sign-off on every Critical alert during this phase." },
+  { phase: "Phase 3", title: "Training", months: "Months 6–7", desc: "Onboard the maintenance team on the dashboard and the escalation workflow; run through the RCA framework on real events." },
+  { phase: "Phase 4", title: "Scale", months: "Months 8–12", desc: "Extend to remaining equipment classes (mills, kiln, packing) and additional plants once pilot results validate the model." },
+];
+
+// Problem diagnosis — the current-state cost of reactive maintenance,
+// grounded in the same citations used throughout the equipment frameworks.
+const PROBLEM_STATS = [
+  { stat: "$120K–350K", label: "lost production per day from an unplanned primary crusher failure (industry estimate)" },
+  { stat: "56%", label: "of premature bearing failures are lubrication-related and preventable" },
+  { stat: "60%+", label: "of crusher breakdowns are wear-related — predictable, not random" },
+  { stat: "Hours, not days", label: "for a crusher failure to starve the raw mill and run the kiln feed dry within a shift" },
+];
 
 function nowLabel() {
   const d = new Date();
@@ -202,24 +218,7 @@ function WearBar({ pct, weeksToCondemn }) {
 // ---------------------------------------------------------------------------
 // Crusher schematic
 // ---------------------------------------------------------------------------
-// Risk marker pinned at a physical component location (FR4). One shared
-// implementation for all modeled bearings.
-function SchematicMarker({ x, y, tier, score, label, labelX, labelY, anchor = "start" }) {
-  return (
-    <g>
-      <circle cx={x} cy={y} r="9" fill={TIER_COLOR[tier]} stroke={COLORS.bgPanel} strokeWidth="2">
-        {tier === "Critical" && <animate attributeName="r" values="9;13;9" dur="1.4s" repeatCount="indefinite" />}
-      </circle>
-      <text x={labelX} y={labelY} textAnchor={anchor} fontFamily="'IBM Plex Mono', monospace" fontSize="11" fill={COLORS.textPrimary}>{label}</text>
-      <text x={labelX} y={labelY + 15} textAnchor={anchor} fontFamily="'IBM Plex Mono', monospace" fontSize="12" fontWeight="600" fill={TIER_COLOR[tier]}>{Math.round(score)}</text>
-    </g>
-  );
-}
-
-function CrusherSchematic({ modeled, jawWear, cssPct }) {
-  const eccentric = modeled.find(e => e.id === "eccentric");
-  const motor = modeled.find(e => e.id === "motor");
-  const counter = modeled.find(e => e.id === "counter");
+function CrusherSchematic({ eccentricScore, eccentricTier, jawWear, cssPct }) {
   return (
     <div style={{ padding: "26px 32px 22px" }}>
       <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: 18, flexWrap: "wrap", gap: 8 }}>
@@ -252,15 +251,11 @@ function CrusherSchematic({ modeled, jawWear, cssPct }) {
             fill={COLORS.textMuted} opacity="0.5" transform={`rotate(${i * 37} ${r.x + r.s / 2} ${r.y + r.s / 2})`} />
         ))}
 
-        {/* Drive motor: flywheel driven off the eccentric shaft via V-belt */}
-        <line x1="569" y1="44" x2="647" y2="91" stroke={COLORS.steel} strokeWidth="2" strokeDasharray="5,4" opacity="0.7" />
-        <circle cx="660" cy="100" r="15" fill={COLORS.bgPanelRaised} stroke={COLORS.border} strokeWidth="2" />
-        {/* Countershaft running off the drive motor */}
-        <line x1="668" y1="113" x2="704" y2="178" stroke={COLORS.steel} strokeWidth="3" opacity="0.7" />
-
-        <SchematicMarker x={560} y={40} tier={eccentric.riskTier} score={eccentric.riskScore} label="Eccentric Shaft" labelX={575} labelY={35} />
-        <SchematicMarker x={660} y={100} tier={motor.riskTier} score={motor.riskScore} label="Drive Motor" labelX={660} labelY={132} anchor="middle" />
-        <SchematicMarker x={710} y={185} tier={counter.riskTier} score={counter.riskScore} label="Countershaft" labelX={710} labelY={212} anchor="middle" />
+        <circle cx="560" cy="40" r="9" fill={TIER_COLOR[eccentricTier]} stroke={COLORS.bgPanel} strokeWidth="2">
+          {eccentricTier === "Critical" && <animate attributeName="r" values="9;13;9" dur="1.4s" repeatCount="indefinite" />}
+        </circle>
+        <text x="575" y="35" fontFamily="'IBM Plex Mono', monospace" fontSize="11" fill={COLORS.textPrimary}>Eccentric Shaft</text>
+        <text x="575" y="50" fontFamily="'IBM Plex Mono', monospace" fontSize="12" fontWeight="600" fill={TIER_COLOR[eccentricTier]}>{Math.round(eccentricScore)}</text>
 
         <line x1="560" y1="200" x2="640" y2="215" stroke={COLORS.steel} strokeWidth="4" />
         <circle cx="640" cy="215" r="6" fill={COLORS.steel} />
@@ -470,6 +465,95 @@ function RiskLimitationsPanel({ open, onToggle }) {
 }
 
 
+// ---------------------------------------------------------------------------
+// Problem diagnosis banner — cold-visitor context, shown prominently up top
+// ---------------------------------------------------------------------------
+function ProblemDiagnosisBanner() {
+  return (
+    <div style={{ background: COLORS.bgPanel, borderBottom: `1px solid ${COLORS.border}`, padding: "18px 32px" }}>
+      <div style={{ fontFamily: "'Oswald', sans-serif", fontSize: 13, letterSpacing: 1.5, color: COLORS.textMuted, textTransform: "uppercase", marginBottom: 12 }}>
+        Why This Matters — Current-State Problem
+      </div>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(190px, 1fr))", gap: 16 }}>
+        {PROBLEM_STATS.map((s, i) => (
+          <div key={i}>
+            <div style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: 20, fontWeight: 600, color: COLORS.wear }}>{s.stat}</div>
+            <div style={{ fontSize: 11, color: COLORS.textMuted, lineHeight: 1.4, marginTop: 3 }}>{s.label}</div>
+          </div>
+        ))}
+      </div>
+      <div style={{ fontSize: 11.5, color: COLORS.textPrimary, marginTop: 14, lineHeight: 1.5 }}>
+        Cement plants run continuous 24/7 processes where a single component failure cascades downstream fast. Components fail repeatedly not because they're unpredictable — but because manual, periodic inspection can't keep pace with how early these failure modes actually become detectable in sensor data. That gap is what this system targets.
+      </div>
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Sustainability panel (collapsible, matches Methodology/Risks style)
+// ---------------------------------------------------------------------------
+function SustainabilityPanel({ open, onToggle }) {
+  return (
+    <div style={{ background: COLORS.bgPanel, border: `1px solid ${COLORS.border}`, borderRadius: 10, overflow: "hidden" }}>
+      <button onClick={onToggle} style={{
+        width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center",
+        background: "none", border: "none", cursor: "pointer", padding: "16px 20px",
+        fontFamily: "'Oswald', sans-serif", fontSize: 13, letterSpacing: 1.5, color: COLORS.textMuted, textTransform: "uppercase",
+      }}>
+        <span style={{ display: "flex", alignItems: "center", gap: 8 }}><Leaf size={13} color={COLORS.low} /> Sustainability Impact</span>
+        <span style={{ color: COLORS.steel }}>{open ? "−" : "+"}</span>
+      </button>
+      {open && (
+        <div style={{ padding: "0 20px 20px", fontSize: 12, lineHeight: 1.7, color: COLORS.textPrimary }}>
+          <p style={{ margin: "0 0 10px" }}>
+            <Flame size={12} color={COLORS.wear} style={{ verticalAlign: "middle", marginRight: 6 }} />
+            <b>Cold restarts are energy-intensive.</b> An unplanned kiln stoppage forces a relight cycle that consumes significantly more fuel per tonne of clinker than steady-state operation, and produces a corresponding spike in emissions during ramp-up.
+          </p>
+          <p style={{ margin: "0 0 10px" }}>
+            <b>Fewer unplanned stoppages → fewer cold restarts.</b> Catching bearing and gearbox degradation early — while the equipment can still be brought down on a controlled schedule — avoids the emergency-stop-and-relight cycle entirely, rather than just shortening it.
+          </p>
+          <p style={{ margin: 0 }}>
+            <b>Reduced scrap and rework.</b> Process upsets from unplanned equipment failure (e.g. off-spec clinker during an uncontrolled kiln stop) also generate material waste — condition-based maintenance reduces this alongside the direct energy impact.
+          </p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Implementation roadmap — horizontal 4-phase timeline
+// ---------------------------------------------------------------------------
+function RoadmapTimeline() {
+  return (
+    <div style={{ background: COLORS.bgPanel, border: `1px solid ${COLORS.border}`, borderRadius: 10, padding: "20px 24px", margin: "0 28px 28px" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 20 }}>
+        <Map size={14} color={COLORS.steel} />
+        <div style={{ fontFamily: "'Oswald', sans-serif", fontSize: 13, letterSpacing: 1.5, color: COLORS.textMuted, textTransform: "uppercase" }}>
+          12-Month Implementation Roadmap
+        </div>
+      </div>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 4, position: "relative" }}>
+        <div style={{
+          position: "absolute", top: 15, left: "12%", right: "12%", height: 2, background: COLORS.border, zIndex: 0,
+        }} className="roadmap-line" />
+        {ROADMAP_PHASES.map((p, i) => (
+          <div key={i} style={{ position: "relative", zIndex: 1, textAlign: "center", padding: "0 8px" }}>
+            <div style={{
+              width: 30, height: 30, borderRadius: "50%", background: COLORS.bgPanelRaised, border: `2px solid ${COLORS.steel}`,
+              display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 10px",
+              fontFamily: "'IBM Plex Mono', monospace", fontSize: 12, fontWeight: 600, color: COLORS.steel,
+            }}>{i + 1}</div>
+            <div style={{ fontFamily: "'Oswald', sans-serif", fontSize: 14, color: COLORS.textPrimary, marginBottom: 2 }}>{p.title}</div>
+            <div style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: 9.5, color: COLORS.steel, marginBottom: 8 }}>{p.months}</div>
+            <div style={{ fontSize: 10.5, color: COLORS.textMuted, lineHeight: 1.5 }}>{p.desc}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function CrusherDashboard() {
   const cursorRef = useRef({});
 
@@ -490,8 +574,8 @@ export default function CrusherDashboard() {
   const [selectedItem, setSelectedItem] = useState(null);
   const [showMethodology, setShowMethodology] = useState(false);
   const [showRisks, setShowRisks] = useState(false);
+  const [showSustainability, setShowSustainability] = useState(false);
   const historyRef = useRef([]);
-  const tickRef = useRef(1);
 
   useEffect(() => {
     const avg = modeled.reduce((s, e) => s + e.riskScore, 0) / modeled.length;
@@ -502,32 +586,20 @@ export default function CrusherDashboard() {
   }, []);
 
   const applyModeledUpdate = (next) => {
-    // Alert only on a tier CHANGE into High/Critical, not on every tick a
-    // component stays there — the R5 (alert fatigue) mitigation, implemented.
-    const prevTier = Object.fromEntries(modeled.map(e => [e.name, e.riskTier]));
     next.forEach(e => {
-      if ((e.riskTier === "Critical" || e.riskTier === "High") && e.riskTier !== prevTier[e.name]) {
+      if (e.riskTier === "Critical" || e.riskTier === "High") {
         setAlerts(a => [{
           id: Date.now() + Math.random(), time: nowLabel(), name: e.short,
           tier: e.riskTier, score: Math.round(e.riskScore), kind: "model",
           trueFault: e.trueFault, predictedFault: e.predictedFault,
-          action: ACTION_TEXT[e.riskTier],
         }, ...a].slice(0, 6));
       }
     });
     const avg = next.reduce((s, e) => s + e.riskScore, 0) / next.length;
-    const newHist = [...historyRef.current.slice(-11), { t: `T${tickRef.current++}`, plantRisk: Math.round(avg) }];
+    const newHist = [...historyRef.current.slice(-11), { t: `T${historyRef.current.length}`, plantRisk: Math.round(avg) }];
     historyRef.current = newHist;
     setHistory(newHist);
     setModeled(next);
-  };
-
-  const precomputedTick = () => {
-    const next = modeled.map(e => {
-      const row = nextRealReading(e.name, cursorRef);
-      return { ...e, ...row };
-    });
-    applyModeledUpdate(next);
   };
 
   const runTick = async () => {
@@ -542,26 +614,28 @@ export default function CrusherDashboard() {
         }));
         applyModeledUpdate(results);
       } catch (err) {
-        // Actually fall back, so the banner copy is true and the demo keeps moving.
         setLiveError(err.message || "Live inference request failed");
-        setLiveMode(false);
-        precomputedTick();
       } finally {
         setLiveLoading(false);
       }
     } else {
-      precomputedTick();
+      const next = modeled.map(e => {
+        const row = nextRealReading(e.name, cursorRef);
+        return { ...e, ...row };
+      });
+      applyModeledUpdate(next);
     }
 
     setWear(prev => prev.map(e => {
       const next = Math.min(100, e.pct + Math.random() * 1.8);
       if (next >= 80 && e.pct < 80) {
-        setAlerts(a => [{ id: Date.now() + Math.random(), time: nowLabel(), name: e.short, tier: "Critical", score: Math.round(next), kind: "wear", action: WEAR_ACTION }, ...a].slice(0, 6));
+        setAlerts(a => [{ id: Date.now() + Math.random(), time: nowLabel(), name: e.short, tier: "Critical", score: Math.round(next), kind: "wear" }, ...a].slice(0, 6));
       }
       return { ...e, pct: next };
     }));
   };
 
+  const eccentric = modeled.find(e => e.id === "eccentric");
   const jawWear = wear.find(w => w.id === "jaw");
   const cssWear = wear.find(w => w.id === "css");
   const plantAvg = Math.round(modeled.reduce((s, e) => s + e.riskScore, 0) / modeled.length);
@@ -589,7 +663,7 @@ export default function CrusherDashboard() {
             <span style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: 14, fontWeight: 600, color: TIER_COLOR[plantTier] }}>{plantAvg}</span>
           </div>
           <button
-            onClick={() => { setLiveMode(m => !m); setLiveError(null); }}
+            onClick={() => setLiveMode(m => !m)}
             title="Toggle between precomputed real test-set rows and live Python API inference"
             style={{
               display: "flex", alignItems: "center", gap: 7, background: liveMode ? COLORS.low + "22" : COLORS.bgPanelRaised,
@@ -611,9 +685,11 @@ export default function CrusherDashboard() {
       )}
       {liveError && (
         <div style={{ padding: "8px 32px", background: COLORS.critical + "15", borderBottom: `1px solid ${COLORS.border}`, fontFamily: "'IBM Plex Mono', monospace", fontSize: 11, color: COLORS.critical }}>
-          API error: {liveError} — switched back to Precomputed mode. Live mode needs the deployed Vercel /api/predict function (or `vercel dev` locally).
+          API error: {liveError}. Falling back to precomputed mode — check that /api/predict deployed correctly (requires Vercel, not `vite dev` alone).
         </div>
       )}
+
+      <ProblemDiagnosisBanner />
 
       <BusinessImpactStrip
         criticalCount={modeled.filter(e => e.riskTier === "Critical").length}
@@ -621,7 +697,7 @@ export default function CrusherDashboard() {
       />
 
       <div style={{ background: COLORS.bgPanel, borderBottom: `1px solid ${COLORS.border}` }}>
-        <CrusherSchematic modeled={modeled} jawWear={jawWear.pct} cssPct={cssWear.pct} />
+        <CrusherSchematic eccentricScore={eccentric.riskScore} eccentricTier={eccentric.riskTier} jawWear={jawWear.pct} cssPct={cssWear.pct} />
       </div>
 
       <div style={{ display: "grid", gridTemplateColumns: "1.4fr 1fr", gap: 20, padding: 28 }} className="dashboard-grid">
@@ -700,9 +776,6 @@ export default function CrusherDashboard() {
                       <div style={{ fontSize: 10.5, color: COLORS.textMuted, fontFamily: "'IBM Plex Mono', monospace" }}>
                         {a.time} · {a.kind === "wear" ? "Condemn limit approaching" : `${a.tier} · true:${a.trueFault} pred:${a.predictedFault}`}
                       </div>
-                      <div style={{ marginTop: 3, fontSize: 10.5, color: COLORS.textPrimary, lineHeight: 1.35 }}>
-                        → {a.action}
-                      </div>
                     </div>
                     <ChevronRight size={14} color={COLORS.textMuted} />
                   </div>
@@ -713,8 +786,11 @@ export default function CrusherDashboard() {
 
           <MethodologyPanel open={showMethodology} onToggle={() => setShowMethodology(v => !v)} />
           <RiskLimitationsPanel open={showRisks} onToggle={() => setShowRisks(v => !v)} />
+          <SustainabilityPanel open={showSustainability} onToggle={() => setShowSustainability(v => !v)} />
         </div>
       </div>
+
+      <RoadmapTimeline />
 
       <DetailModal item={selectedItem} onClose={() => setSelectedItem(null)} />
 
