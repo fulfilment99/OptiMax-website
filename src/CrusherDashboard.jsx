@@ -50,6 +50,8 @@ const ACTION_TEXT = {
   Low: "No action — continue routine monitoring",
 };
 
+const WEAR_ACTION = "Plan replacement before condemn limit — schedule during next stop";
+
 function nowLabel() {
   const d = new Date();
   return d.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
@@ -147,7 +149,24 @@ function WearBar({ pct, weeksToCondemn }) {
 // ---------------------------------------------------------------------------
 // Crusher schematic
 // ---------------------------------------------------------------------------
-function CrusherSchematic({ eccentricScore, eccentricTier, jawWear, cssPct }) {
+// Risk marker pinned at a physical component location (FR4). One shared
+// implementation for all modeled bearings.
+function SchematicMarker({ x, y, tier, score, label, labelX, labelY, anchor = "start" }) {
+  return (
+    <g>
+      <circle cx={x} cy={y} r="9" fill={TIER_COLOR[tier]} stroke={COLORS.bgPanel} strokeWidth="2">
+        {tier === "Critical" && <animate attributeName="r" values="9;13;9" dur="1.4s" repeatCount="indefinite" />}
+      </circle>
+      <text x={labelX} y={labelY} textAnchor={anchor} fontFamily="'IBM Plex Mono', monospace" fontSize="11" fill={COLORS.textPrimary}>{label}</text>
+      <text x={labelX} y={labelY + 15} textAnchor={anchor} fontFamily="'IBM Plex Mono', monospace" fontSize="12" fontWeight="600" fill={TIER_COLOR[tier]}>{Math.round(score)}</text>
+    </g>
+  );
+}
+
+function CrusherSchematic({ modeled, jawWear, cssPct }) {
+  const eccentric = modeled.find(e => e.id === "eccentric");
+  const motor = modeled.find(e => e.id === "motor");
+  const counter = modeled.find(e => e.id === "counter");
   return (
     <div style={{ padding: "26px 32px 22px" }}>
       <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: 18, flexWrap: "wrap", gap: 8 }}>
@@ -180,11 +199,15 @@ function CrusherSchematic({ eccentricScore, eccentricTier, jawWear, cssPct }) {
             fill={COLORS.textMuted} opacity="0.5" transform={`rotate(${i * 37} ${r.x + r.s / 2} ${r.y + r.s / 2})`} />
         ))}
 
-        <circle cx="560" cy="40" r="9" fill={TIER_COLOR[eccentricTier]} stroke={COLORS.bgPanel} strokeWidth="2">
-          {eccentricTier === "Critical" && <animate attributeName="r" values="9;13;9" dur="1.4s" repeatCount="indefinite" />}
-        </circle>
-        <text x="575" y="35" fontFamily="'IBM Plex Mono', monospace" fontSize="11" fill={COLORS.textPrimary}>Eccentric Shaft</text>
-        <text x="575" y="50" fontFamily="'IBM Plex Mono', monospace" fontSize="12" fontWeight="600" fill={TIER_COLOR[eccentricTier]}>{Math.round(eccentricScore)}</text>
+        {/* Drive motor: flywheel driven off the eccentric shaft via V-belt */}
+        <line x1="569" y1="44" x2="647" y2="91" stroke={COLORS.steel} strokeWidth="2" strokeDasharray="5,4" opacity="0.7" />
+        <circle cx="660" cy="100" r="15" fill={COLORS.bgPanelRaised} stroke={COLORS.border} strokeWidth="2" />
+        {/* Countershaft running off the drive motor */}
+        <line x1="668" y1="113" x2="704" y2="178" stroke={COLORS.steel} strokeWidth="3" opacity="0.7" />
+
+        <SchematicMarker x={560} y={40} tier={eccentric.riskTier} score={eccentric.riskScore} label="Eccentric Shaft" labelX={575} labelY={35} />
+        <SchematicMarker x={660} y={100} tier={motor.riskTier} score={motor.riskScore} label="Drive Motor" labelX={660} labelY={132} anchor="middle" />
+        <SchematicMarker x={710} y={185} tier={counter.riskTier} score={counter.riskScore} label="Countershaft" labelX={710} labelY={212} anchor="middle" />
 
         <line x1="560" y1="200" x2="640" y2="215" stroke={COLORS.steel} strokeWidth="4" />
         <circle cx="640" cy="215" r="6" fill={COLORS.steel} />
@@ -275,6 +298,7 @@ export default function CrusherDashboard() {
   const [liveLoading, setLiveLoading] = useState(false);
   const [liveError, setLiveError] = useState(null);
   const historyRef = useRef([]);
+  const tickRef = useRef(1);
 
   useEffect(() => {
     const avg = modeled.reduce((s, e) => s + e.riskScore, 0) / modeled.length;
@@ -285,20 +309,32 @@ export default function CrusherDashboard() {
   }, []);
 
   const applyModeledUpdate = (next) => {
+    // Alert only on a tier CHANGE into High/Critical, not on every tick a
+    // component stays there — the R5 (alert fatigue) mitigation, implemented.
+    const prevTier = Object.fromEntries(modeled.map(e => [e.name, e.riskTier]));
     next.forEach(e => {
-      if (e.riskTier === "Critical" || e.riskTier === "High") {
+      if ((e.riskTier === "Critical" || e.riskTier === "High") && e.riskTier !== prevTier[e.name]) {
         setAlerts(a => [{
           id: Date.now() + Math.random(), time: nowLabel(), name: e.short,
           tier: e.riskTier, score: Math.round(e.riskScore), kind: "model",
           trueFault: e.trueFault, predictedFault: e.predictedFault,
+          action: ACTION_TEXT[e.riskTier],
         }, ...a].slice(0, 6));
       }
     });
     const avg = next.reduce((s, e) => s + e.riskScore, 0) / next.length;
-    const newHist = [...historyRef.current.slice(-11), { t: `T${historyRef.current.length}`, plantRisk: Math.round(avg) }];
+    const newHist = [...historyRef.current.slice(-11), { t: `T${tickRef.current++}`, plantRisk: Math.round(avg) }];
     historyRef.current = newHist;
     setHistory(newHist);
     setModeled(next);
+  };
+
+  const precomputedTick = () => {
+    const next = modeled.map(e => {
+      const row = nextRealReading(e.name, cursorRef);
+      return { ...e, ...row };
+    });
+    applyModeledUpdate(next);
   };
 
   const runTick = async () => {
@@ -313,28 +349,26 @@ export default function CrusherDashboard() {
         }));
         applyModeledUpdate(results);
       } catch (err) {
+        // Actually fall back, so the banner copy is true and the demo keeps moving.
         setLiveError(err.message || "Live inference request failed");
+        setLiveMode(false);
+        precomputedTick();
       } finally {
         setLiveLoading(false);
       }
     } else {
-      const next = modeled.map(e => {
-        const row = nextRealReading(e.name, cursorRef);
-        return { ...e, ...row };
-      });
-      applyModeledUpdate(next);
+      precomputedTick();
     }
 
     setWear(prev => prev.map(e => {
       const next = Math.min(100, e.pct + Math.random() * 1.8);
       if (next >= 80 && e.pct < 80) {
-        setAlerts(a => [{ id: Date.now() + Math.random(), time: nowLabel(), name: e.short, tier: "Critical", score: Math.round(next), kind: "wear" }, ...a].slice(0, 6));
+        setAlerts(a => [{ id: Date.now() + Math.random(), time: nowLabel(), name: e.short, tier: "Critical", score: Math.round(next), kind: "wear", action: WEAR_ACTION }, ...a].slice(0, 6));
       }
       return { ...e, pct: next };
     }));
   };
 
-  const eccentric = modeled.find(e => e.id === "eccentric");
   const jawWear = wear.find(w => w.id === "jaw");
   const cssWear = wear.find(w => w.id === "css");
   const plantAvg = Math.round(modeled.reduce((s, e) => s + e.riskScore, 0) / modeled.length);
@@ -362,7 +396,7 @@ export default function CrusherDashboard() {
             <span style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: 14, fontWeight: 600, color: TIER_COLOR[plantTier] }}>{plantAvg}</span>
           </div>
           <button
-            onClick={() => setLiveMode(m => !m)}
+            onClick={() => { setLiveMode(m => !m); setLiveError(null); }}
             title="Toggle between precomputed real test-set rows and live Python API inference"
             style={{
               display: "flex", alignItems: "center", gap: 7, background: liveMode ? COLORS.low + "22" : COLORS.bgPanelRaised,
@@ -384,12 +418,12 @@ export default function CrusherDashboard() {
       )}
       {liveError && (
         <div style={{ padding: "8px 32px", background: COLORS.critical + "15", borderBottom: `1px solid ${COLORS.border}`, fontFamily: "'IBM Plex Mono', monospace", fontSize: 11, color: COLORS.critical }}>
-          API error: {liveError}. Falling back to precomputed mode — check that /api/predict deployed correctly (requires Vercel, not `vite dev` alone).
+          API error: {liveError} — switched back to Precomputed mode. Live mode needs the deployed Vercel /api/predict function (or `vercel dev` locally).
         </div>
       )}
 
       <div style={{ background: COLORS.bgPanel, borderBottom: `1px solid ${COLORS.border}` }}>
-        <CrusherSchematic eccentricScore={eccentric.riskScore} eccentricTier={eccentric.riskTier} jawWear={jawWear.pct} cssPct={cssWear.pct} />
+        <CrusherSchematic modeled={modeled} jawWear={jawWear.pct} cssPct={cssWear.pct} />
       </div>
 
       <div style={{ display: "grid", gridTemplateColumns: "1.4fr 1fr", gap: 20, padding: 28 }} className="dashboard-grid">
@@ -467,6 +501,9 @@ export default function CrusherDashboard() {
                       <div style={{ fontSize: 12.5, color: COLORS.textPrimary }}>{a.name}</div>
                       <div style={{ fontSize: 10.5, color: COLORS.textMuted, fontFamily: "'IBM Plex Mono', monospace" }}>
                         {a.time} · {a.kind === "wear" ? "Condemn limit approaching" : `${a.tier} · true:${a.trueFault} pred:${a.predictedFault}`}
+                      </div>
+                      <div style={{ marginTop: 3, fontSize: 10.5, color: COLORS.textPrimary, lineHeight: 1.35 }}>
+                        → {a.action}
                       </div>
                     </div>
                     <ChevronRight size={14} color={COLORS.textMuted} />
