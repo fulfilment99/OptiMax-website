@@ -1,3 +1,4 @@
-scikit-learn==1.5.2
-joblib==1.4.2
-numpy==1.26.4
+# No external dependencies needed.
+# rf_inference.py uses only the Python standard library (json, os) --
+# this avoids scikit-learn/scipy, which previously pushed the deployed
+# function bundle over Vercel's 225MB serverless function size limit.
