@@ -50,9 +50,8 @@ const ACTION_TEXT = {
   Low: "No action — continue routine monitoring",
 };
 
-<<<<<<< HEAD
 const WEAR_ACTION = "Plan replacement before condemn limit — schedule during next stop";
-=======
+
 // Escalation workflow — who gets notified, response SLA, per tier.
 // Mirrors the Maintenance Escalation Workflow document (Task 1.1).
 const ESCALATION_INFO = {
@@ -105,7 +104,6 @@ const RISK_REGISTER_TOP = [
 // Business impact reference figures — industry-wide estimates (not DCP-
 // confirmed), used only to illustrate the order of magnitude at stake.
 const CRUSHER_DOWNTIME_COST_PER_DAY = { low: 120000, high: 350000 };
->>>>>>> 30a888f60f5f34688958e8ccaca2730e96260c45
 
 function nowLabel() {
   const d = new Date();
